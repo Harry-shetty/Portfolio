@@ -48,8 +48,30 @@ export default function App() {
     }
 
     try {
-  const apiUrl = (import.meta as any).env?.VITE_API_URL || "http://localhost:4000/api/messages";
-  const res = await fetch(apiUrl, {
+      // Try Google Apps Script first (if configured)
+      const googleScriptUrl = (import.meta as any).env?.VITE_GOOGLE_SCRIPT_URL;
+      
+      if (googleScriptUrl) {
+        const res = await fetch(googleScriptUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, message }),
+          mode: "no-cors" // Google Apps Script requires no-cors
+        });
+        
+        // Note: no-cors mode means we can't read the response, but the request will succeed
+        // Assume success if no error is thrown
+        setFormSubmitted(true);
+        setTimeout(() => {
+          setFormSubmitted(false);
+          setFormData({ name: "", email: "", message: "" });
+        }, 3000);
+        return;
+      }
+      
+      // Fallback to backend API
+      const apiUrl = (import.meta as any).env?.VITE_API_URL || "http://localhost:4000/api/messages";
+      const res = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, message })
