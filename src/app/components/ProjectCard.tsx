@@ -16,7 +16,11 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ title, description, stack, status, featured = false, highlights, href }: ProjectCardProps) {
-  const card = (
+  const rootClass = `bg-[#151515] border border-[#262626] rounded-2xl p-6
+        transition-all duration-300 cursor-pointer group
+        ${featured ? "md:col-span-2 lg:col-span-3 border-[#00FF88]/20" : ""}`;
+
+  const inner = (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -29,11 +33,7 @@ export function ProjectCard({ title, description, stack, status, featured = fals
           : "0 20px 40px rgba(0, 255, 136, 0.1)",
         borderColor: "#00FF88"
       }}
-      className={`
-        bg-[#151515] border border-[#262626] rounded-2xl p-6
-        transition-all duration-300 cursor-pointer group
-        ${featured ? "md:col-span-2 lg:col-span-3 border-[#00FF88]/20" : ""}
-      `}
+      className={"w-full h-full"}
     >
       {featured && (
         <motion.div
@@ -183,11 +183,15 @@ export function ProjectCard({ title, description, stack, status, featured = fals
 
   if (href) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className="block">
-        {card}
+      <a href={href} target="_blank" rel="noopener noreferrer" className={rootClass}>
+        {inner}
       </a>
     );
   }
 
-  return card;
+  return (
+    <div className={rootClass}>
+      {inner}
+    </div>
+  );
 }
