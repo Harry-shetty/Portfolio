@@ -658,6 +658,18 @@ export default function App() {
             >
               harshabk328@gmail.com
             </a>
+            <div className="mt-6">
+              <a
+                href="https://docs.google.com/spreadsheets/d/1W30kNIrqgxZUUidGvTmdgbSokdm34D4BPaz-HSnjQ2M/edit?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#A1A1AA] hover:text-[#00FF88] text-xs md:text-sm transition-colors duration-300"
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+              >
+                View Submissions →
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>
