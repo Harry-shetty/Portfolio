@@ -487,6 +487,16 @@ export default function App() {
               institution="Lovely Professional University"
               details="CGPA: 6.5 | Focus on Full Stack Development, AI Integration, and Software Engineering"
             />
+            <EducationItem
+              period="April 2021 - March 2023"
+              degree="Intermediate; Percentage: 83%"
+              institution="Masters Pre-University College, Hassan, Karnataka"
+            />
+            <EducationItem
+              period="April 2020 - March 2021"
+              degree="Matriculation; Percentage: 80%"
+              institution="Poornaprajna Education Center, Belur, Karnataka"
+            />
           </div>
         </div>
       </section>
