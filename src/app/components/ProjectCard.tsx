@@ -65,6 +65,9 @@ export function ProjectCard({ title, description, stack, status, featured = fals
               ) : title === "Portfolio Website" ? (
                 // Use static public asset for the portfolio screenshot
                 <img src="/assets/images/portfolio.jpg" alt="Portfolio demo" className="w-full h-full object-cover rounded-xl" />
+              ) : title === "Parivartan" ? (
+                // Use the provided Parivartan image (place file at public/assets/images/parivartan.svg)
+                <img src="/assets/images/parivartan.svg" alt="Parivartan demo" className="w-full h-full object-cover rounded-xl" />
               ) : (
                 <ExternalLink className="w-8 h-8 text-[#A1A1AA] group-hover:text-[#00FF88] transition-colors" />
               )}
@@ -125,6 +128,8 @@ export function ProjectCard({ title, description, stack, status, featured = fals
                   </video>
                 ) : title === "Portfolio Website" ? (
                   <img src="/assets/images/portfolio.jpg" alt="Portfolio demo" className="w-full h-full object-cover rounded-xl" />
+                ) : title === "Parivartan" ? (
+                  <img src="/assets/images/parivartan.svg" alt="Parivartan demo" className="w-full h-full object-cover rounded-xl" />
                 ) : (
                   <ExternalLink className="w-8 h-8 text-[#A1A1AA] group-hover:text-[#00FF88] transition-colors" />
                 )}

@@ -39,6 +39,35 @@ app.post("/api/messages", async (req, res) => {
   }
 });
 
+// Helper: simple email format validation
+function isValidEmail(email) {
+  if (!email || typeof email !== "string") return false;
+  // Basic email regex (covers common cases, not fully RFC-complete)
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+
+// Get messages filtered by email (requires valid email query param)
+app.get("/api/messages", async (req, res) => {
+  try {
+    const { email } = req.query;
+
+    if (!email) {
+      return res.status(400).json({ error: "email query parameter is required" });
+    }
+
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ error: "invalid_email" });
+    }
+
+    const messages = await Message.find({ email }).sort({ createdAt: -1 }).limit(100);
+    return res.status(200).json({ success: true, count: messages.length, messages });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "internal_error" });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });

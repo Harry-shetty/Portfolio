@@ -242,6 +242,8 @@ export default function App() {
               <motion.a
                 key={idx}
                 href={href}
+                target={href && href.startsWith("http") ? "_blank" : undefined}
+                rel={href && href.startsWith("http") ? "noopener noreferrer" : undefined}
                 whileHover={{ scale: 1.2, color: "#00FF88" }}
                 className="text-[#A1A1AA] hover:text-[#00FF88] transition-colors"
               >
@@ -642,12 +644,14 @@ export default function App() {
           >
             {[
               { Icon: Github, href: "https://github.com/Harry-shetty" },
-              { Icon: Linkedin, href: "#" },
+              { Icon: Linkedin, href: "https://www.linkedin.com/in/harshabk03/" },
               { Icon: Mail, href: "#contact" },
             ].map(({ Icon, href }, idx) => (
               <motion.a
                 key={idx}
                 href={href}
+                target={href && href.startsWith("http") ? "_blank" : undefined}
+                rel={href && href.startsWith("http") ? "noopener noreferrer" : undefined}
                 whileHover={{ scale: 1.2, color: "#00FF88" }}
                 className="text-[#A1A1AA] hover:text-[#00FF88] transition-colors"
               >
