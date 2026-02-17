@@ -343,6 +343,7 @@ export default function App() {
               description="Python desktop GUI application with fair randomization logic, multiple dice roll support, and comprehensive score tracking system."
               stack={["Python", "Tkinter", "Random Module"]}
               status="COMPLETE"
+              href="https://github.com/Harry-shetty/Dice-Simulator.git"
             />
             
             <ProjectCard
