@@ -12,10 +12,11 @@ interface ProjectCardProps {
   status?: string;
   featured?: boolean;
   highlights?: string[];
+  href?: string;
 }
 
-export function ProjectCard({ title, description, stack, status, featured = false, highlights }: ProjectCardProps) {
-  return (
+export function ProjectCard({ title, description, stack, status, featured = false, highlights, href }: ProjectCardProps) {
+  const card = (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -179,4 +180,14 @@ export function ProjectCard({ title, description, stack, status, featured = fals
       </div>
     </motion.div>
   );
+
+  if (href) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className="block">
+        {card}
+      </a>
+    );
+  }
+
+  return card;
 }

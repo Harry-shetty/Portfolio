@@ -329,6 +329,7 @@ export default function App() {
               stack={["React.js", "Node.js", "Express.js", "Gemini AI 2.5", "JavaScript", "CSS"]}
               status="DEPLOYED"
               featured={true}
+                href="https://github.com/Harry-shetty/Portfolio.git"
               highlights={[
                 "AI-powered image recognition using Google Gemini 2.5 Flash",
                 "Automated verification workflows",
