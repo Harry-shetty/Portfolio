@@ -1,7 +1,6 @@
 
-  # Upgrade Harsha's Portfolio Design
+  # Harsha Portfolio Design
 
-  This is a code bundle for Upgrade Harsha's Portfolio Design. The original project is available at https://www.figma.com/design/tsCUVuYrWzQzBnxfpW8A0E/Upgrade-Harsha-s-Portfolio-Design.
 
   ## Running the code
 
