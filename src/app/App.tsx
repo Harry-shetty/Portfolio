@@ -1,4 +1,8 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import { ParticleText } from "./components/ParticleText";
+
+
 // removed XLSX export per request; backend will handle storage
 import { motion, AnimatePresence } from "motion/react";
 import { Github, Linkedin, Mail, ArrowRight, Terminal, Award, GraduationCap, FileText } from "lucide-react";
@@ -13,6 +17,8 @@ import { CertificateItem } from "./components/CertificateItem";
 import { SkillCategory } from "./components/SkillCategory";
 
 export default function App() {
+  const navigate = useNavigate();
+
   const [isHovering, setIsHovering] = useState(false);
   const [currentTaglineIndex, setCurrentTaglineIndex] = useState(0);
   const [formData, setFormData] = useState({
@@ -26,7 +32,7 @@ export default function App() {
     "Full Stack Developer",
     "AI-Powered Web Builder",
     "React & Node.js Engineer",
-    "Hackathon Finalist",
+    "Datathon Runner-Up",
     "Problem Solver"
   ];
   
@@ -98,6 +104,7 @@ export default function App() {
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
+  
 
   return (
     <div className="min-h-screen bg-[#0E0E0E] text-[#F5F5F7] cursor-none">
@@ -192,14 +199,14 @@ export default function App() {
             <span className="text-xs md:text-sm font-mono text-[#A1A1AA]">Computer Science Engineering Student</span>
           </motion.div>
           
-          <motion.h1 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-5xl md:text-8xl mb-6 md:mb-8 tracking-tight leading-none"
+            className="mb-6 md:mb-8 w-full flex justify-center"
           >
-            Harsha B K
-          </motion.h1>
+            <ParticleText text="Harsha B K" />
+          </motion.div>
           
           {/* Rotating Tagline */}
           <div className="h-12 md:h-16 flex items-center justify-center overflow-hidden mb-8 md:mb-12">
@@ -258,8 +265,8 @@ export default function App() {
           >
             {[
               { Icon: Github, href: "https://github.com/Harry-shetty" },
-              { Icon: Linkedin, href: "https://www.linkedin.com/in/harshabk03/" },
-              { Icon: Mail, href: "#contact" },
+              { Icon: Linkedin, href: "https://www.linkedin.com/in/harshabk" },
+              { Icon: Mail, href: "mailto:harshabk328@gmail.com" },
             ].map(({ Icon, href }, idx) => (
               <motion.a
                 key={idx}
@@ -344,22 +351,45 @@ export default function App() {
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
           >
-            {/* Featured Project - Parivartan */}
+            {/* Featured Project - WeatherGPT */}
             <ProjectCard
-              title="Parivartan"
-              description="Government civic issue reporting web application built for the Government of Punjab. An AI-powered platform that revolutionizes how citizens report and track civic issues."
-              stack={["React.js", "Node.js", "Express.js", "Gemini AI 2.5", "JavaScript", "CSS"]}
-              status="DEPLOYED"
+              title="WeatherGPT"
+              description="AI-Powered Weather Assistant. A conversational AI specialized in meteorology, climate patterns, and weather alerts for concise insights."
+              stack={["React 19", "Vite", "Tailwind CSS", "Google Gemini API", "React Leaflet", "Three.js"]}
+              status="LIVE"
               featured={true}
-                href="https://github.com/Harry-shetty/Portfolio.git"
+              href="https://weather-gpt-weld.vercel.app"
               highlights={[
-                "AI-powered image recognition using Google Gemini 2.5 Flash",
-                "Automated verification workflows",
-                "Reduced manual processing time by 80%"
+                "Integrated Gemini 3.6 Flash for chat",
+                "Interactive global weather map and 3D particle landing page",
+                "Real-time weather chat and live public alerts"
               ]}
             />
             
             {/* Other Projects */}
+            <ProjectCard
+              title="FashionCycle"
+              description="AI-powered circular fashion platform that recommends the most sustainable next step for unwanted clothing."
+              stack={["React.js", "Node.js", "MongoDB", "Google Gemini API", "JWT"]}
+              status="COMPLETE"
+              highlights={[
+                "Natural-language recommendations via Gemini API",
+                "Integrated marketplace and EcoPoints sustainability dashboard"
+              ]}
+            />
+            
+            <ProjectCard
+              title="Parivartan"
+              description="Full-stack civic issue reporting platform for the Government of Punjab covering 18+ departments."
+              stack={["React.js", "Node.js", "Express.js", "Google Gemini AI", "JavaScript", "CSS"]}
+              status="COMPLETE"
+              href="https://github.com/Harry-shetty/Parivartan"
+              highlights={[
+                "AI-powered image analysis and automated complaint classification",
+                "Reduced manual complaint processing time by 80%"
+              ]}
+            />
+
             <ProjectCard
               title="Dice Simulator Application"
               description="Python desktop GUI application with fair randomization logic, multiple dice roll support, and comprehensive score tracking system."
@@ -367,13 +397,18 @@ export default function App() {
               status="COMPLETE"
               href="https://github.com/Harry-shetty/Dice-Simulator.git"
             />
-            
-            <ProjectCard
-              title="Portfolio Website"
-              description="Fully responsive personal portfolio website with mobile-first design approach, showcasing projects and technical skills."
-              stack={["HTML5", "CSS3", "JavaScript", "Responsive Design"]}
-              status="LIVE"
-            />
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex justify-center mt-12 md:mt-16"
+          >
+            <AnimatedButton variant="secondary" onClick={() => navigate("/projects")}>
+              View All Projects <ArrowRight className="w-4 h-4 ml-2 inline" />
+            </AnimatedButton>
           </motion.div>
         </div>
       </section>
@@ -399,23 +434,28 @@ export default function App() {
           >
             <SkillCategory
               category="Languages"
-              skills={["C++", "C", "Python", "JavaScript", "PHP"]}
+              skills={["Python", "Java", "C++"]}
               delay={0}
             />
             <SkillCategory
-              category="Frameworks & Libraries"
-              skills={["React.js", "Node.js", "Express.js", "Tailwind CSS", "JavaScript", "HTML5", "CSS3"]}
+              category="Frontend"
+              skills={["React.js", "HTML", "CSS", "Tailwind CSS"]}
               delay={0.1}
             />
             <SkillCategory
-              category="Tools & Technologies"
-              skills={["MySQL", "MongoDB", "Google Gemini AI", "Git", "REST APIs"]}
+              category="Backend"
+              skills={["Node.js", "Express.js"]}
               delay={0.2}
             />
             <SkillCategory
-              category="Soft Skills"
-              skills={["Problem Solving", "Project Management", "Adaptability"]}
+              category="Databases"
+              skills={["MongoDB", "MySQL"]}
               delay={0.3}
+            />
+            <SkillCategory
+              category="Tools & Platforms"
+              skills={["Git", "GitHub", "Google Gemini AI", "Linux", "Windows", "Mac"]}
+              delay={0.4}
             />
           </div>
         </div>
@@ -438,50 +478,99 @@ export default function App() {
             <p className="text-[#A1A1AA] text-base md:text-lg text-center md:text-left">Competition highlights and recognitions</p>
           </motion.div>
           
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-[#151515] border border-[#00FF88]/30 rounded-3xl p-8 md:p-12 relative overflow-hidden"
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
-          >
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+            {/* Achievement 1 */}
             <motion.div
-              className="absolute top-0 right-0 w-64 h-64 bg-[#00FF88]/5 rounded-full blur-3xl"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 4, repeat: Infinity }}
-            />
-            
-            <div className="relative z-10">
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-[#151515] border border-[#00FF88]/30 rounded-3xl p-8 md:p-10 relative overflow-hidden"
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
               <motion.div
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, type: "spring" }}
-                className="inline-flex items-center gap-3 px-5 py-2 bg-[#00FF88]/10 border border-[#00FF88] rounded-full mb-6"
-              >
-                <Award className="w-5 h-5 text-[#00FF88]" />
-                <span className="text-[#00FF88] font-mono text-sm">FINALIST</span>
-              </motion.div>
-              
-              <h3 className="text-3xl md:text-4xl text-[#F5F5F7] mb-4">
-                CipherThon 2.0 (2024)
-              </h3>
-              
-              <p className="text-[#A1A1AA] text-base md:text-lg mb-6">
-                Competed against <span className="text-[#00FF88]">5000+ participants</span> and secured a spot in the finals, demonstrating strong problem-solving abilities and technical excellence.
-              </p>
-              
-              <motion.div
-                className="h-0.5 bg-gradient-to-r from-[#00FF88] to-transparent"
-                initial={{ width: "0%" }}
-                whileInView={{ width: "100%" }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.4 }}
+                className="absolute top-0 right-0 w-64 h-64 bg-[#00FF88]/5 rounded-full blur-3xl"
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 4, repeat: Infinity }}
               />
-            </div>
-          </motion.div>
+              
+              <div className="relative z-10">
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, type: "spring" }}
+                  className="inline-flex items-center gap-3 px-5 py-2 bg-[#00FF88]/10 border border-[#00FF88] rounded-full mb-6"
+                >
+                  <Award className="w-5 h-5 text-[#00FF88]" />
+                  <span className="text-[#00FF88] font-mono text-sm">FIRST RUNNER-UP</span>
+                </motion.div>
+                
+                <h3 className="text-2xl md:text-3xl text-[#F5F5F7] mb-4">
+                  AgenticIQ Datathon by TransOrg Analytics
+                </h3>
+                
+                <p className="text-[#A1A1AA] text-base mb-6">
+                  Secured the First Runner-Up position in Sept 2026, demonstrating strong problem-solving and AI development abilities.
+                </p>
+                
+                <motion.div
+                  className="h-0.5 bg-gradient-to-r from-[#00FF88] to-transparent"
+                  initial={{ width: "0%" }}
+                  whileInView={{ width: "100%" }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: 0.4 }}
+                />
+              </div>
+            </motion.div>
+
+            {/* Achievement 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="bg-[#151515] border border-[#00FF88]/30 rounded-3xl p-8 md:p-10 relative overflow-hidden"
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              <motion.div
+                className="absolute top-0 right-0 w-64 h-64 bg-[#00FF88]/5 rounded-full blur-3xl"
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 4, repeat: Infinity }}
+              />
+              
+              <div className="relative z-10">
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, type: "spring" }}
+                  className="inline-flex items-center gap-3 px-5 py-2 bg-[#00FF88]/10 border border-[#00FF88] rounded-full mb-6"
+                >
+                  <Award className="w-5 h-5 text-[#00FF88]" />
+                  <span className="text-[#00FF88] font-mono text-sm">FINALIST</span>
+                </motion.div>
+                
+                <h3 className="text-2xl md:text-3xl text-[#F5F5F7] mb-4">
+                  CipherThon 2.0 (2024)
+                </h3>
+                
+                <p className="text-[#A1A1AA] text-base mb-6">
+                  Competed against <span className="text-[#00FF88]">5000+ participants</span> and secured a spot in the finals, demonstrating technical excellence.
+                </p>
+                
+                <motion.div
+                  className="h-0.5 bg-gradient-to-r from-[#00FF88] to-transparent"
+                  initial={{ width: "0%" }}
+                  whileInView={{ width: "100%" }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: 0.4 }}
+                />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -504,19 +593,19 @@ export default function App() {
           
           <div className="relative">
             <EducationItem
-              period="Aug 2023 - Present"
-              degree="B.Tech in Computer Science Engineering"
-              institution="Lovely Professional University"
-              details="CGPA: 6.5 | Focus on Full Stack Development, AI Integration, and Software Engineering"
+              period="2023 - 2027"
+              degree="Computer Science and Engineering"
+              institution="Lovely Professional University, Phagwara, Punjab"
+              details="CGPA: 6.9"
             />
             <EducationItem
-              period="April 2021 - March 2023"
-              degree="Intermediate; Percentage: 83%"
-              institution="Masters Pre-University College, Hassan, Karnataka"
+              period="2021 - 2023"
+              degree="Intermediate | Percentage: 83"
+              institution="Masters P U College, Hassan, Karnataka"
             />
             <EducationItem
-              period="April 2020 - March 2021"
-              degree="Matriculation; Percentage: 80%"
+              period="2020 - 2021"
+              degree="Matriculation | Percentage: 80"
               institution="Poornaprajna Education Center, Belur, Karnataka"
             />
           </div>
@@ -547,28 +636,37 @@ export default function App() {
           >
             <div className="mb-8 md:mb-10">
               <CertificateItem
-                title="Data Structures & Algorithms"
-                issuer="CipherSchools"
+                title="Supervised Machine Learning: Regression and Classification"
+                issuer="DeepLearning.AI, Stanford University | Apr 2026"
                 delay={0}
-                href={"https://cipher-other-assets.s3.ap-south-1.amazonaws.com/certificates/6825f22984e1c7517d4a3adb_67e3fb0045b2b98d0db4e726"}
+                href="https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Accenture%20North%20America/tHFz7Bfjmh35DXQv6_Accenture%20North%20America_fQQnsBGn2HNpYsrz3_1721134080529_completion_certificate.pdf"
               />
             </div>
 
             <div className="mb-8 md:mb-10">
               <CertificateItem
-                title="Project Management Job Simulation"
-                issuer="Professional Development Program"
+                title="Fundamentals of Network Communication"
+                issuer="University of Colorado System | Dec 2024"
                 delay={0.1}
-                href={"https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Accenture%20North%20America/tHFz7Bfjmh35DXQv6_Accenture%20North%20America_fQQnsBGn2HNpYsrz3_1721134080529_completion_certificate.pdf"}
+                href="https://www.mindluster.com/student/certificate/12617476768#google_vignette"
+              />
+            </div>
+
+            <div className="mb-8 md:mb-10">
+              <CertificateItem
+                title="The Bits and Bytes of Computer Networking"
+                issuer="Google | Sep 2024"
+                delay={0.2}
+                href="https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Accenture%20North%20America/tHFz7Bfjmh35DXQv6_Accenture%20North%20America_fQQnsBGn2HNpYsrz3_1721134080529_completion_certificate.pdf"
               />
             </div>
 
             <div>
               <CertificateItem
-                title="Career Advice Soft Skills"
-                issuer="Professional Development Program"
-                delay={0.2}
-                href={"https://www.mindluster.com/student/certificate/12617476768#google_vignette"}
+                title="Summer Training in Data Structures & Algorithms (70 hours)"
+                issuer="CipherSchools | Jun 2025 - Jul 2025"
+                delay={0.3}
+                href="https://cipher-other-assets.s3.ap-south-1.amazonaws.com/certificates/6825f22984e1c7517d4a3adb_67e3fb0045b2b98d0db4e726"
               />
             </div>
           </div>
@@ -690,8 +788,8 @@ export default function App() {
           >
             {[
               { Icon: Github, href: "https://github.com/Harry-shetty" },
-              { Icon: Linkedin, href: "https://www.linkedin.com/in/harshabk03/" },
-              { Icon: Mail, href: "#contact" },
+              { Icon: Linkedin, href: "https://www.linkedin.com/in/harshabk" },
+              { Icon: Mail, href: "mailto:harshabk328@gmail.com" },
             ].map(({ Icon, href }, idx) => (
               <motion.a
                 key={idx}
